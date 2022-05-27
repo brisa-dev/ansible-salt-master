@@ -1,0 +1,37 @@
+---
+- name: Install Saltstack Master
+  become: True
+  hosts: hosts
+  tasks:
+    - name: Add repository
+      yum_repository:
+        name: SaltStack
+        description: EPEL YUM repo
+        baseurl: https://repo.saltproject.io/py3/redhat/8/x86_64/3004/
+        gpgcheck: no
+    - name: Install packages
+      yum:
+        name:
+          - salt-master
+          - salt-syndic
+          - salt-minion
+          - git
+    - name: Configure files
+      git:
+        repo: 'https://github.com/brisa-dev/salt-stack.git'
+        dest: /srv/salt
+    - name: Copy master.d directory
+      copy:
+        src: /srv/salt/master/etc/
+        dest: /etc/salt/
+        remote_src: True
+    - name: Enable / Start Salt Master
+      service:
+        name: salt-master
+        enabled: yes
+        state: started
+    - name: Enable / Start Salt Minion
+      service:
+        name: salt-minion
+        enabled: yes
+        state: started
