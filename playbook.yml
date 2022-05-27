@@ -2,6 +2,7 @@
 - name: Install Saltstack Master
   become: True
   hosts: hosts
+  remote_user: root
   tasks:
     - name: Add repository
       yum_repository:
