@@ -16,16 +16,17 @@
           - salt-master
           - salt-syndic
           - salt-minion
+          - salt-api
           - git
     - name: Configure files
       git:
         repo: 'https://github.com/brisa-dev/salt-stack.git'
         dest: /srv/salt
-        version: change_salt_root_dirs
+        #version: change_salt_root_dirs
     - name: Copy master.d directory
       copy:
-        src: /srv/salt/master/etc/
-        dest: /etc/salt/file_roots
+        src: /srv/salt/file_roots/master/etc/
+        dest: /etc/salt/
         remote_src: True
     - name: Enable / Start Salt Master
       service:
