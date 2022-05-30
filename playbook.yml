@@ -21,6 +21,7 @@
       git:
         repo: 'https://github.com/brisa-dev/salt-stack.git'
         dest: /srv/salt
+        version: change_salt_root_dirs
     - name: Copy master.d directory
       copy:
         src: /srv/salt/master/etc/
