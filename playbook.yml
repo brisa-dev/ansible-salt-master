@@ -24,7 +24,7 @@
     - name: Copy master.d directory
       copy:
         src: /srv/salt/master/etc/
-        dest: /etc/salt/
+        dest: /etc/salt/file_roots
         remote_src: True
     - name: Enable / Start Salt Master
       service:
